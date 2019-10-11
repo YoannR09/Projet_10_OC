@@ -259,23 +259,35 @@ public class LivreControllerTest {
     }
 
     @Test
-    public List<Livre> findLivresByAuteurContainingAndCategorieId(){
+    public void findLivresByAuteurContainingAndCategorieId(){
         // GIVEN
         when(dao.findLivresByTitreContainingAndCategorieId(anyString(),anyInt())).thenReturn(vList);
 
         // WHEN
-        List<Livre> list = controller.findLivresByTitreContainingAndCategorieId(TITRE,ID);
+        List<Livre> list = controller.findLivresByTitreContainingAndCategorieId(AUTEUR,ID);
 
         // THEN
         assertEquals(list.size(),2);
         when(dao.findLivresByTitreContainingAndCategorieId(anyString(),anyInt())).then((Answer<Void>) invocationOnMock -> {
             throw new NotFoundException("Erreur");
         });
-        assertNull(controller.findLivresByTitreContainingAndCategorieId(TITRE,ID));
+        assertNull(controller.findLivresByTitreContainingAndCategorieId(AUTEUR,ID));
     }
 
-    public List<Livre> findLivresByIsbnContainingAndCategorieId(){
+    @Test
+    public void findLivresByIsbnContainingAndCategorieId(){
+        // GIVEN
+        when(dao.findLivresByIsbnContainingAndCategorieId(anyString(),anyInt())).thenReturn(vList);
 
+        // WHEN
+        List<Livre> list = controller.findLivresByIsbnContainingAndCategorieId(TITRE,ID);
+
+        // THEN
+        assertEquals(list.size(),2);
+        when(dao.findLivresByIsbnContainingAndCategorieId(anyString(),anyInt())).then((Answer<Void>) invocationOnMock -> {
+            throw new NotFoundException("Erreur");
+        });
+        assertNull(controller.findLivresByIsbnContainingAndCategorieId(TITRE,ID));
     }
 
     @Before
