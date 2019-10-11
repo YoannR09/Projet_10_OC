@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>fr.oc.projet</groupId>
+    <artifactId>bibliotheque-serveur</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <groupId>fr.oc.projet</groupId>
+  <artifactId>bibliotheque-serveur-batch</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>bibliotheque-serveur-batch</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>fr.oc.projet</groupId>
+      <artifactId>bibliotheque-serveur-business</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>fr.oc.projet</groupId>
+      <artifactId>bibliotheque-serveur-model</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>fr.oc.projet</groupId>
+      <artifactId>bibliotheque-serveur-technical</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.3</version>
+    </dependency>
+
+    <!-- Pool de connexion Commons DBCP -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <!-- Création du JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.example.demo.ticket.batch.Main</mainClass>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix></classpathPrefix>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <!-- Assemblage -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <descriptors>
+            <descriptor>../bibliotheque-serveur-batch/src/assembly/archive-deploy.xml</descriptor>
+          </descriptors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>assembly-archive-deploy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

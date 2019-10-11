@@ -1,0 +1,12 @@
+INSERT INTO categorie (nom,description)
+VALUES
+('Livres pour enfants','La littérature d''enfance et de jeunesse est un secteur de l''édition qui se spécialise, par sa forme et son contenu, dans les publications destinées à la jeunesse.'),
+('Bande dessinés','Une bande dessinée est une forme d''expression artistique, souvent désignée comme le « neuvième art », utilisant une juxtaposition de dessins, articulés en séquences narratives et le plus souvent accompagnés de textes. '),
+('Romans et littérature','Le roman est un genre littéraire, caractérisé essentiellement par une narration fictionnelle. La place importante faite à l''imagination transparaît dans certaines expressions comme « C''est du roman ! » ou dans certaines acceptions de l’adjectif « romanesque » qui renvoient à l''extraordinaire des personnages, des situations ou de l''intrigue. '),
+('Romans policiers et polars','Le genre policier, ou polar, est un genre caractérisant certaines œuvres narratives et qui se distingue par sa mise en scène d''une énigme que le protagoniste tente de résoudre, souvent par une enquête de police.'),
+('Histoire','Un livre est un document écrit formant unité et conçu comme tel, composé de pages reliées les unes aux autres. Il a pour fonction d''être un support de l''écriture, permettant la diffusion et la conservation de textes de nature variée.'),
+('Romance et littérature','Une romance est un type de roman d''amour développé dans certains pays anglophones, tels que les États-Unis, le Canada, le Royaume-Uni et l''Australie. Le terme est un anglicisme inspiré de « romance novel ».'),
+('Manga','Un manga est une bande dessinée japonaise. Le mot « manga » est par ailleurs parfois utilisé pour désigner, par extension, une bande dessinée non japonaise respectant les codes des productions populaires japonaises ou pour nommer, par métonymie, d''autres produits visuels rappelant certaines de ces bandes dessinées.'),
+('Tourisme et Voyages',' Un guide touristique ou guide de voyage est un type de livre contenant des informations sur un lieu donné, qui peuvent être d''ordre pratique ...'),
+('Loisirs créatifs, décorations et...','Un loisir créatif est un loisir qui fait appel à la créativité et à l''expression personnelle pour la ... La broderie consiste à ajouter une décoration faite de fil sur un tissu ou une toile à ....'),
+('Scolaire et Parascolaire','Préparez au mieux la rentrée des classes en achetant vos livres scolaires et parascolaires');
