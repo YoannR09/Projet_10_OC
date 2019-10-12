@@ -8,7 +8,6 @@
     <constant name="struts.devMode" value="true" />
     <constant name="struts.objectFactory" value="spring" />
 
-
     <package name="base" abstract="true" extends="struts-default">
 
         <interceptors>

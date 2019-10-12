@@ -340,7 +340,7 @@ public class AbonneController {
         try {
            return getAbonneDao().findAll();
         }catch (Exception e){
-            getLogger().error("Methode updateAbonne() erreur : "+e);
+            getLogger().error("Methode findAll() erreur : "+e);
             return null;
         }
     }

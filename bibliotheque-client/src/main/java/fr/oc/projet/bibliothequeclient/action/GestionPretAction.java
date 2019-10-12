@@ -22,7 +22,6 @@ import java.util.Properties;
  * Classe qui permet la consultation de ses prêts à un abonné.
  * Il peut consulter ses prêts en cours et les prolonger si possible.
  */
-@Component
 public class GestionPretAction extends ActionSupport {
 
     @Autowired

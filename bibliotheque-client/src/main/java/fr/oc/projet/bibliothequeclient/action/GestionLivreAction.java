@@ -3,10 +3,12 @@ package fr.oc.projet.bibliothequeclient.action;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import fr.oc.projet.bibliothequeclient.beans.*;
+import fr.oc.projet.bibliothequeclient.beans.Abonne;
+import fr.oc.projet.bibliothequeclient.beans.Categorie;
+import fr.oc.projet.bibliothequeclient.beans.Illustration;
+import fr.oc.projet.bibliothequeclient.beans.Livre;
 import fr.oc.projet.bibliothequeclient.proxies.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +18,6 @@ import java.util.List;
  * Classe qui gère le catalogue de livre.
  * Permet de faire des recherches de livres via plusieurs critères.
  */
-@Component
 public class GestionLivreAction extends ActionSupport {
 
     @Autowired
