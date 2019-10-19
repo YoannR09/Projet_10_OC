@@ -18,8 +18,8 @@ public class Employe {
     private String nom;
     private String prenom;
     private String matricule;
-    private Date dateentree;
-    private Date datesortie;
+    private Date dateEntree;
+    private Date dateSortie;
     private Integer roleId;
     private Integer adresseId;
 
@@ -82,20 +82,20 @@ public class Employe {
         this.matricule = matricule;
     }
 
-    public Date getDateentree() {
-        return dateentree;
+    public Date getDateEntree() {
+        return dateEntree;
     }
 
-    public void setDateentree(Date dateentree) {
-        this.dateentree = dateentree;
+    public void setDateEntree(Date dateEntree) {
+        this.dateEntree = dateEntree;
     }
 
-    public Date getDatesortie() {
-        return datesortie;
+    public Date getDateSortie() {
+        return dateSortie;
     }
 
-    public void setDatesortie(Date datesortie) {
-        this.datesortie = datesortie;
+    public void setDateSortie(Date dateSortie) {
+        this.dateSortie = dateSortie;
     }
 
     public Integer getRoleId() {

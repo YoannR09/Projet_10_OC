@@ -49,6 +49,22 @@ public class LivreUniqueController {
     }
 
     /**
+     * Méthode pour récupèrer un livre unique via l'id d'un livre et l'id d'une bibliothèque
+     * @param livreId
+     * @param bibliothequeId
+     * @return
+     */
+    @GetMapping(value = "/CountLivreUniqueBibliothequeTotal/{livreId},{bibliothequeId}")
+    public Integer countLivreUniqueBibliothequeTotal(@PathVariable int livreId, @PathVariable int bibliothequeId){
+        try {
+            return getLivreUniqueDao().countLivreUniqueByLivreIdAndBibliothequeId(livreId,bibliothequeId);
+        }catch (Exception e){
+            getLogger().error("Methode getCategorie() erreur : "+e);
+            return null;
+        }
+    }
+
+    /**
      * Méthode pour compter le nombre de livre unique disponible via l'id d'un livre
      * @param livreId
      * @return
@@ -79,6 +95,18 @@ public class LivreUniqueController {
             return null;
         }
     }
+
+    /**
+     * Méthode pour récupérer une liste d'exemplaires via l'id d'un livre et l'id d'une bibliotheque
+     * @param livreId
+     * @param bibliothequeId
+     * @return
+     */
+    @GetMapping(value = "/LivreUnique/LivreBibliotheque/{livreId},{bibliothequeId}")
+    public List<LivreUnique> getListLivreUniqueLivreBibliotheque(@PathVariable Integer livreId, @PathVariable Integer bibliothequeId){
+        return livreUniqueDao.getListLivreUniqueLivreBibliotheque(livreId,bibliothequeId);
+    }
+
 
     /**
      * Méthodepour récupèrer une liste d'exemplaire via un titre et auteur
