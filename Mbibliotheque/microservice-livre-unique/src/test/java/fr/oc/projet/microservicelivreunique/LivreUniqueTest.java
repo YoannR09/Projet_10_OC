@@ -32,10 +32,10 @@ public class LivreUniqueTest {
     @Test
     public void numeroInterneSettersGettersTest() {
         // GIVEN
-        livreUnique.setNumeroInterne(NUMERO);
+        livreUnique.setNumero(NUMERO);
 
         // WHEN
-        Integer numero = livreUnique.getNumeroInterne();
+        Integer numero = livreUnique.getNumero();
 
         // THEN
         assertEquals(numero,NUMERO);

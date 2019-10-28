@@ -1,31 +1,40 @@
 package fr.oc.projet.bibliothequeclient.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import fr.oc.projet.bibliothequeclient.beans.Categorie;
-import fr.oc.projet.bibliothequeclient.beans.LivreUnique;
-import fr.oc.projet.bibliothequeclient.beans.Pret;
+import fr.oc.projet.bibliothequeclient.beans.*;
+import fr.oc.projet.bibliothequeclient.mail.MailReservation;
 import fr.oc.projet.bibliothequeclient.proxies.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Classe qui gère la restitution d'un prêt en cours
  */
+@Component
 public class RestituerAction extends ActionSupport {
 
-    private         Pret            pret;
-    private         int             pretId;
-    private         int             bibliothequeId;
-    private         int             livreUniqueId;
-    private         List<Pret>      pretList;
-    private         List<Categorie> categorieList;
-    private         String          bibliotheque;
-    private         String          numeroInterne;
-    private         String          isbn;
-
+    private         Pret                pret;
+    private         int                 pretId;
+    private         int                 bibliothequeId;
+    private         int                 livreUniqueId;
+    private         int                 livreId;
+    private         int                 reservationId;
+    private         List<Pret>          pretList;
+    private         List<Categorie>     categorieList;
+    private         List<Reservation>   list;
+    private         String              bibliotheque;
+    private         String              numero;
+    private         String              isbn;
+    private Abonne abonne;
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -41,6 +50,8 @@ public class RestituerAction extends ActionSupport {
     MicroServiceLivreProxy microServiceLivreProxy;
     @Autowired
     MicroServiceCategorieProxy microServiceCategorieProxy;
+    @Autowired
+    MicroServiceReservationProxy microServiceReservationProxy;
 
 
     /**
@@ -50,9 +61,9 @@ public class RestituerAction extends ActionSupport {
      */
     public String doRechercheRestituerPret(){
         Boolean isNumber = null;
-        if (!numeroInterne.equals("")) {
+        if (!numero.equals("")) {
             try {
-                 int y = (int) Integer.valueOf(numeroInterne);
+                 int y = (int) Integer.valueOf(numero);
                  isNumber = true;
             } catch (NumberFormatException e) {
                 isNumber = false;
@@ -64,20 +75,20 @@ public class RestituerAction extends ActionSupport {
         if (isNumber != false) {
             if (!bibliotheque.equals("Toutes les bibliothèques")) {
                 bibliothequeId = microServiceBibliothequeProxy.findByNom(bibliotheque).getId();
-                if (!isbn.equals("") && !numeroInterne.equals("")) {
-                    pretList = microServicePretProxy.getListPretLivreISBNNumInterneBibliotheque(isbn,numeroInterne,bibliothequeId);
-                } else if (!isbn.equals("") && numeroInterne.equals("")) {
+                if (!isbn.equals("") && !numero.equals("")) {
+                    pretList = microServicePretProxy.getListPretLivreISBNNumInterneBibliotheque(isbn,numero,bibliothequeId);
+                } else if (!isbn.equals("") && numero.equals("")) {
                     pretList = microServicePretProxy.getListPretLivreISBNBibliotheque(isbn,bibliothequeId);
-                } else if (isbn.equals("") && !numeroInterne.equals("")) {
-                    pretList = microServicePretProxy.getListPretLivreNumInterneBibliotheque(numeroInterne,bibliothequeId);
+                } else if (isbn.equals("") && !numero.equals("")) {
+                    pretList = microServicePretProxy.getListPretLivreNumInterneBibliotheque(numero,bibliothequeId);
                 }
             } else {
-                if (!isbn.equals("") && !numeroInterne.equals("")) {
-                    pretList = microServicePretProxy.getListPretLivreISBNNumInterne(isbn,numeroInterne);
-                } else if (!isbn.equals("") && numeroInterne.equals("")) {
+                if (!isbn.equals("") && !numero.equals("")) {
+                    pretList = microServicePretProxy.getListPretLivreISBNNumInterne(isbn,numero);
+                } else if (!isbn.equals("") && numero.equals("")) {
                     pretList = microServicePretProxy.getListPretLivreISBN(isbn);
-                } else if (isbn.equals("") && !numeroInterne.equals("")) {
-                    pretList = microServicePretProxy.getListPretLivreNumInterne(numeroInterne);
+                } else if (isbn.equals("") && !numero.equals("")) {
+                    pretList = microServicePretProxy.getListPretLivreNumInterne(numero);
                 }
             }
             if (pretList != null) {
@@ -107,13 +118,11 @@ public class RestituerAction extends ActionSupport {
         String vResult;
         try {
         pret = microServicePretProxy.getPret(pretId);
-        LivreUnique livreUnique = microServiceLivreUniqueProxy.findById(pret.getLivreUniqueId());
-        livreUnique.setDisponible(true);
-        microServiceLivreUniqueProxy.updateDispo(livreUnique);
         microServicePretProxy.delete(pretId);
         this.addActionMessage("Livre restitué, ce livre est maintenant disponible pour un nouveau prêt.");
         logger.info("Livre restitué à l'inventaire");
         categorieList = microServiceCategorieProxy.getListCategorie();
+        infoReservation();
         vResult = ActionSupport.SUCCESS;
         }catch (Exception e){
             vResult = ActionSupport.ERROR;
@@ -123,6 +132,25 @@ public class RestituerAction extends ActionSupport {
         return vResult;
     }
 
+    public void infoReservation() throws IOException {
+        pret.setLivreUnique(microServiceLivreUniqueProxy.findById(pret.getLivreUniqueId()));
+        pret.setBibliotheque(microServiceBibliothequeProxy.getBibliotheque(pret.getLivreUnique().getBibliothequeId()));
+        pret.setLivre(microServiceLivreProxy.getLivre(pret.getLivreUnique().getLivreId()));
+        LivreUnique livreUnique = pret.getLivreUnique();
+        List<Reservation> vList = microServiceReservationProxy
+                .findByBibliothequeIdAndLivreId(pret.getBibliotheque().getId(),pret.getLivre().getId());
+        if(vList.size() != 0){
+            livreUnique.setSousReserve(true);
+            microServiceLivreUniqueProxy.updateDispo(livreUnique);
+            MailReservation mailReservation = new MailReservation(microServiceAbonneProxy,
+                    microServiceReservationProxy,microServiceLivreUniqueProxy,microServiceLivreProxy,microServiceBibliothequeProxy);
+            mailReservation.gestionMail(vList,livreUnique);
+        }else {
+            pret.getLivreUnique().setDisponible(true);
+            pret.getLivreUnique().setSousReserve(false);
+            microServiceLivreUniqueProxy.updateDispo(pret.getLivreUnique());
+        }
+    }
 
     public Pret getPret() {
         return pret;
@@ -164,12 +192,12 @@ public class RestituerAction extends ActionSupport {
         this.bibliotheque = bibliotheque;
     }
 
-    public String getNumeroInterne() {
-        return numeroInterne;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNumeroInterne(String numeroInterne) {
-        this.numeroInterne = numeroInterne;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getIsbn() {

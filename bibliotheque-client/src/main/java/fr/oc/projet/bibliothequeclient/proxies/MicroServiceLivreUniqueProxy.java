@@ -22,6 +22,9 @@ public interface MicroServiceLivreUniqueProxy {
     @GetMapping(value = "/CountLivreUniqueBibliotheque/{livreId},{bibliothequeId}")
     Integer countLivreUniqueBibliothequeDisponible(@PathVariable("livreId") int livreId, @PathVariable("bibliothequeId") int bibliothequeId);
 
+    @GetMapping(value = "/CountLivreUniqueBibliothequeTotal/{livreId},{bibliothequeId}")
+    Integer countLivreUniqueBibliothequeTotal(@PathVariable("livreId") int livreId, @PathVariable("bibliothequeId") int bibliothequeId);
+
 
     @GetMapping(value = "/CountLivreUnique/{livreId}")
     Integer countLivreUniqueDisponible(@PathVariable("livreId") int livreId);
@@ -166,6 +169,9 @@ public interface MicroServiceLivreUniqueProxy {
      */
     @GetMapping(value = "/LivreUnique/ISBNBibliotheque/{isbn},{bibliothequeId}")
     List<LivreUnique> getListLivreUniqueISBNBibliotheque(@PathVariable("isbn") String isbn,@PathVariable("bibliothequeId") Integer bibliothequeId);
+
+    @GetMapping(value = "/LivreUnique/LivreBibliotheque/{livreId},{bibliothequeId}")
+    List<LivreUnique> getListLivreUniqueLivreBibliotheque(@PathVariable("livreId") Integer livreId, @PathVariable("bibliothequeId") Integer bibliothequeId);
 
     /**
      * Méthode pour récupèrer la liste de chaque les exemplaires.

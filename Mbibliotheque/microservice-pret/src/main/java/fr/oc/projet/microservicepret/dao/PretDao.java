@@ -25,6 +25,7 @@ public interface PretDao extends JpaRepository<Pret,Integer> {
 
 
     @Query(value = "SELECT * FROM pret,livre_unique,livre WHERE livre.id = :livreId " +
+            " AND pret.livre_unique_id = livre_unique.id "+
             " AND livre.id = livre_unique.livre_id " +
             " AND bibliotheque_id = :bibliothequeId ",nativeQuery = true)
     List<Pret> getListPretLivreBibliotheque(@Param("livreId") Integer livreId,@Param("bibliothequeId") Integer bibliothequeId);

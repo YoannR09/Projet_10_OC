@@ -26,6 +26,7 @@ import java.util.Map;
 /**
  * Classe pour gérer les comptes des abonnées.
  */
+@Component
 public class LoginAction extends ActionSupport implements SessionAware {
 
     private Map<String, Object> session;

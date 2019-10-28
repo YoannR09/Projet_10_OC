@@ -12,6 +12,8 @@ import java.util.List;
 public interface LivreUniqueDao extends JpaRepository<LivreUnique,Integer> {
     LivreUnique findById(int id);
 
+    Integer countLivreUniqueByLivreIdAndBibliothequeId(int livreId, int bibliothequeId);
+
     Integer countLivreUniqueByLivreIdAndBibliothequeIdAndDisponibleIsTrue(int livreId, int bibliothequeId);
 
     Integer countLivreUniqueByLivreIdAndDisponibleIsTrue(int livreId);
@@ -122,4 +124,12 @@ public interface LivreUniqueDao extends JpaRepository<LivreUnique,Integer> {
             "  ORDER BY titre ",
             nativeQuery = true)
     List<LivreUnique> getListLivreUniqueISBNBibliotheque(@Param("isbn") String isbn,@Param("bibliothequeId") Integer bibliothequeId);
+
+    @Query(value = "SELECT * FROM livre_unique,livre l WHERE " +
+            " bibliotheque_id = :bibliothequeId" +
+            " AND l.id = :livreId "+
+            " AND l.id = livre_unique.livre_id " +
+            "  ORDER BY titre ",
+            nativeQuery = true)
+    List<LivreUnique> getListLivreUniqueLivreBibliotheque(@Param("livreId")Integer livreId, @Param("bibliothequeId") Integer bibliothequeId);
 }

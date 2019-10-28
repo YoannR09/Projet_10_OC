@@ -4,19 +4,21 @@ import com.opensymphony.xwork2.ActionSupport;
 import fr.oc.projet.bibliothequeclient.beans.Categorie;
 import fr.oc.projet.bibliothequeclient.proxies.MicroServiceCategorieProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Classe qui gère la page d'acceuil.
  */
+@Component
 public class GestionIndexAction extends ActionSupport {
 
     private Categorie categorie;
     private List<Categorie> categorieList;
 
     @Autowired
-    MicroServiceCategorieProxy microServiceCategorieProxy;
+    private MicroServiceCategorieProxy microServiceCategorieProxy;
 
     /**
      * Affichage de la page d'acceuil

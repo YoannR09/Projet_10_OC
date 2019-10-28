@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -176,7 +177,7 @@ public class AjouterPretAction extends ActionSupport {
     public String doAjouterPret(){
         String vResult;
         try {
-        propFile = new FileInputStream("C:/Users/Pierrosan/Documents/Projet_7_OC/resources/config.properties");
+        propFile = new FileInputStream("C:/Users/Pierrosan/Documents/Projet_10_OC/resources/config.properties");
         propConfig.load(propFile);
         Pret pret = new Pret();
         pret.setDateEmprunt(new Date());
