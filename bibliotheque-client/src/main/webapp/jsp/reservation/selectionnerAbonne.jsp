@@ -103,6 +103,7 @@
                     <th scope="col">Pseudo</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Prénom</th>
+                    <th scope="col">Sélectionner</th>
                 </tr>
                 </thead>
                 <tbody>

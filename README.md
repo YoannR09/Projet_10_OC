@@ -86,26 +86,4 @@
    Compte employé : el-rambo-poto@hotmail.fr  <br/>
    mot de passe : 123  <br/>
    
-   
-   # Changement apportés pour le release 2.0
-   
-  ### Système de réservation :
-    - Mise en place des tests unitaires dans les microservices.
-    - Ajout d'une table "Reservation" dans la base de données.
-    - Ajout d'une valeur "sous_reserve" dans la table "livre_unique"
-    - Ajout de l'envoie d'un mail quand un livre est restitué, un système de timer 
-    et alors lancé pour supprimer la réservation sous deux jours et passer à la personne
-    suivante dans la file. 
-    - Un timer vérifie toutes les 2 heures si la réservation est toujours existante, si ce
-    n'est psa le cas le système passe à la personne suivante.
-    - Ajout d'une page pour consulter ses réservations et la position dans la file, ainsi
-    que la possibilité de supprimer une de ses réservations;
-    - Mise à jour de la pop-up "Consulter les livres disponibles" pour répondre 
-    à la demande des réservations.
-    - Mise en place de la gestion des réservations dans le cas ou un deuxième livre serait résitué
-    pendant que la première personne dans la file a déjà un livre réservé.
-    - Ajout d'une page de consultation des réservations d'un abonné qui peuvent êtres passés en prêt
-    via l'action d'un employé.
-    - L'employé peut lancer un prêt via une réservations si un livre a était assigné à la
-    réservation.
-    
+  

@@ -80,7 +80,7 @@
                 <tbody>
                 <s:iterator value="pretList">
                     <s:if test="plusTot">
-                        <tr class="table-warning">
+                        <tr style="border : 2px solid orange">
                             <td><s:property value="livreUnique.numero"/></td>
                             <td><s:property value="dateRestitution"/></td>
                             <td>
