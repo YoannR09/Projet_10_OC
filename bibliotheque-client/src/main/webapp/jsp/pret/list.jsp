@@ -124,7 +124,7 @@
                     <tr>
                         <td><s:property value="livreUnique.livre.titre"/></td>
                         <td><s:property value="livreUnique.livre.isbn"/></td>
-                        <td><s:property value="livreUnique.numeroInterne"/></td>
+                        <td><s:property value="livreUnique.numero"/></td>
                         <td><s:property value="bibliotheque.nom"/></td>
                         <td><s:property value="dateEmprunt"/></td>
                         <td><s:property value="dateRestitution"/></td>

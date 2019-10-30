@@ -146,14 +146,18 @@
                         <td> <s:property value="livre.titre"/></td>
                         <td> <s:property value="livre.auteur"/></td>
                         <td><s:property value="livre.isbn"/></td>
-                        <td><s:property value="numeroInterne"/></td>
+                        <td><s:property value="numero"/></td>
                         <td><s:property value="bibliotheque.nom"/></td>
-                        <s:if test="disponible">
-                            <td id="tdBtnRenouv"><s:a action="selectionnerAbonne" class="btn btn-info" style="font-size:0.6em;"><i class="fas fa-arrow-alt-circle-right"></i><s:param name="livreUniqueId" value="id"/></s:a></td>
+                        <s:if test="disponible && !sousReserve">
+                            <td id="tdBtnRenouv"><s:a action="selectionnerAbonne" class="btn btn-info" style="font-size:0.6em;">
+                                <i class="fas fa-arrow-alt-circle-right"></i><s:param name="livreUniqueId" value="id"/></s:a></td>
                         </s:if>
-                        <s:else>
+                        <s:elseif test="!disponible && !sousReserve">
                             <td id="tdBtnRenouv">Indisponible</td>
-                        </s:else>
+                        </s:elseif>
+                        <s:elseif test="sousReserve && !disponible">
+                            <td id="tdBtnRenouv">Sous réserve</td>
+                        </s:elseif>
                     </tr>
                 </s:iterator>
                 </tbody>

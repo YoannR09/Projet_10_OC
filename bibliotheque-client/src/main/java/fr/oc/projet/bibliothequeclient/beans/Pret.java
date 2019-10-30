@@ -15,6 +15,7 @@ public class Pret {
     private         Livre           livre;
     private         Integer         livreUniqueId;
     private         Boolean         expire;
+    private         Boolean         plusTot;
 
     public Pret() {
     }
@@ -105,5 +106,13 @@ public class Pret {
 
     public void setExpire(Boolean expire) {
         this.expire = expire;
+    }
+
+    public Boolean getPlusTot() {
+        return plusTot;
+    }
+
+    public void setPlusTot(Boolean plusTot) {
+        this.plusTot = plusTot;
     }
 }

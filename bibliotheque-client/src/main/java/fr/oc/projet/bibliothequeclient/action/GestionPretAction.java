@@ -22,6 +22,7 @@ import java.util.Properties;
  * Classe qui permet la consultation de ses prêts à un abonné.
  * Il peut consulter ses prêts en cours et les prolonger si possible.
  */
+@Component
 public class GestionPretAction extends ActionSupport {
 
     @Autowired
@@ -66,7 +67,7 @@ public class GestionPretAction extends ActionSupport {
      */
     public String doProlongationPret() {
         try {
-           propFile = new FileInputStream("C:\\Users\\Pierrosan\\Documents\\Projet_7_OC\\resources\\config.properties");
+           propFile = new FileInputStream("C:/Users/El-ra/Documents/Projet_10_OC/resources/config.properties");
             propConfig.load(propFile);
             pret = microServicePretProxy.getPret(pretId);
             Calendar cal = Calendar.getInstance();

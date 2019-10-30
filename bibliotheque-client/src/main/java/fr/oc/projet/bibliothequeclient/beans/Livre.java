@@ -17,6 +17,7 @@ public class Livre {
     private Date dateDeCreation;
     private int illustrationId;
     private int nbreDispo;
+    private Boolean reservable;
 
     public Livre() {
     }
@@ -109,20 +110,11 @@ public class Livre {
         this.dateDeCreation = dateDeCreation;
     }
 
-    @Override
-    public String toString() {
-        return "Livre{" +
-                "id=" + id +
-                ", titre='" + titre + '\'' +
-                ", auteur='" + auteur + '\'' +
-                ", editeur='" + editeur + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", langue='" + langue + '\'' +
-                ", resume='" + resume + '\'' +
-                ", categorieId=" + categorieId +
-                ", dateDeCreation=" + dateDeCreation +
-                ", illustrationId=" + illustrationId +
-                ", nbreDispo=" + nbreDispo +
-                '}';
+    public Boolean getReservable() {
+        return reservable;
+    }
+
+    public void setReservable(Boolean reservable) {
+        this.reservable = reservable;
     }
 }

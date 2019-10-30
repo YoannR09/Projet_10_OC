@@ -52,6 +52,9 @@
             height: 435px;
             border: darkgray 1px solid;
         }
+        #cadreInfoDispo{
+            border: darkgray 1px solid;
+        }
         #cadreBtn
         {
             display: flex;
@@ -98,36 +101,89 @@
                 </section>
             </div>
             <div class="col-12 container " id="cadreBtn">
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#popUpAdresse" style="font-size:0.7em;margin: 15px">
+                <button type="button" class="btn btn-outline-info" id="btnDispo" style="font-size:0.7em;margin: 15px">
                     Voir la disponiblité du livre dans les bibliothèques
                 </button>
             </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="popUpAdresse" tabindex="-1" role="dialog" aria-labelledby="popUpAdresse" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="col-12 container" id="cadreInfoDispo">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <s:iterator value="livreList" status="list">
-                        <s:if test="%{#list.count == 1}">
-                            <p><em>Bibliothèque de la gare :</em> <span><s:property value="nbreDispo"/></span> livres disponibles</p>
-                        </s:if>
-                        <s:elseif test="%{#list.count == 2}">
-                        <p><em>Bibliothèque du centre ville :</em> <span><s:property value="nbreDispo"/></span> livres disponibles</p>
-                        </s:elseif>
-                        <s:elseif test="%{#list.count == 3}">
-                        <p><em>Bibliothèque du port marchand :</em> <span><s:property value="nbreDispo"/></span> livres disponibles</p>
-                        </s:elseif>
-                    </s:iterator>
-                </div>
+            <div class="col-12 container" id="cadreInfoDispo" style="padding-top: 15px;">
+                <s:iterator value="livreList" status="list">
+                    <s:if test="%{#list.count == 1}">
+                        <p style="display: flex;justify-content: space-around"><em style="width: 250px">Bibliothèque de la gare :</em>
+                        <span><s:property value="nbreDispo"/></span>
+                            livres disponibles
+                            <s:if test="reservable && nbreDispo == 0">
+                                <s:if test="#session.user">
+                                    <s:a action="editResa"  class="btn btn-outline-info">
+                                        <s:param name="livreId" value="id"/>
+                                        <s:param name="bibliothequeId" value="1"/>
+                                        Réserver </s:a>
+                                </s:if>
+                                <s:else><s:a action="login"  class="btn btn-outline-info"> Réserver </s:a></s:else>
+                            </s:if>
+                            <s:else>
+                                <button type="button" class="btn btn-outline-info" disabled> Réserver </button>
+                            </s:else>
+                        </p>
+                    </s:if>
+                    <s:elseif test="%{#list.count == 2}">
+                        <p style="display: flex;justify-content: space-around"><em style="width: 250px">Bibliothèque du centre ville :</em> <span><s:property value="nbreDispo"/></span>
+                            livres disponibles
+                            <s:if test="reservable && nbreDispo == 0">
+                                <s:if test="#session.user">
+                                    <s:a action="editResa"  class="btn btn-outline-info">
+                                        <s:param name="livreId" value="id"/>
+                                        <s:param name="bibliothequeId" value="2"/>
+                                        Réserver </s:a>
+                                </s:if>
+                                <s:else><s:a action="login"  class="btn btn-outline-info"> Réserver </s:a></s:else>
+                            </s:if>
+                            <s:else>
+                                <button type="button" class="btn btn-outline-info" disabled> Réserver </button>
+                            </s:else>
+                        </p>
+                    </s:elseif>
+                    <s:elseif test="%{#list.count == 3}">
+                        <p style="display: flex;justify-content: space-around"><em style="width: 250px">Bibliothèque du port marchand :</em> <span><s:property value="nbreDispo"/></span>
+                            livres disponibles
+                            <s:if test="reservable && nbreDispo == 0">
+                                <s:if test="#session.user">
+                                    <s:a action="editResa"  class="btn btn-outline-info">
+                                        <s:param name="livreId" value="id"/>
+                                        <s:param name="bibliothequeId" value="3"/>
+                                        Réserver </s:a>
+                                </s:if>
+                                <s:else><s:a action="login"  class="btn btn-outline-info"> Réserver </s:a></s:else>
+                            </s:if>
+                            <s:else>
+                                <button type="button" class="btn btn-outline-info" disabled> Réserver </button>
+                            </s:else>
+                        </p>
+                    </s:elseif>
+                </s:iterator>
             </div>
+            <em id="legende" style="font-size: 0.6em;color: gray">
+            Pour réserver ces conditions doivent être remplies : <br/>
+            - Aucun prêt en cours sur ce livre. <br/>
+            - Aucune réservation en cours sur ce livre. <br/>
+            - Le nombre de réservation limite n'est pas dépassé pour le livre dans la bibliothèque.
+            </em>
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(function() {
+        $("#cadreInfoDispo").hide();
+        $("#legende").hide();
+    });
+
+    $("#btnDispo").click(function() {
+        $("#cadreInfoDispo").slideDown();
+        $("#legende").show();
+        $("#btnDispo").hide();
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+    });
+</script>
 </body>
 </html>

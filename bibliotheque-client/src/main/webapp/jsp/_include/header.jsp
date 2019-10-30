@@ -16,23 +16,31 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <s:a action="catalogueLivre" class="nav-link" style="font-size:1.1em;">| Livre |</s:a>
+                <s:a action="catalogueLivre" class="nav-link" style="font-size:0.9em;">| Livre |</s:a>
             </li>
             <li class="nav-item">
                 <s:if test="#session.user">
-                <s:a action="doListPret" class="nav-link" style="font-size:1.1em">| Mes prêts |</s:a>
+                    <s:a action="doListPret" class="nav-link" style="font-size:0.9em">| Mes prêts |</s:a>
+                </s:if>
+            </li>
+            <li class="nav-item">
+                <s:if test="#session.user">
+                    <s:a action="doListResa" class="nav-link" style="font-size:0.9em">| Mes Réservations |</s:a>
                 </s:if>
             </li>
             <s:if test="#session.admin">
-            <li class="nav-item">
-                    <s:a action="consulterPret" class="nav-link text-info" style="font-size:1.1em;">| Consulter les prêts |</s:a>
-            </li>
-            <li class="nav-item">
-                    <s:a action="ajouterPret" class="nav-link text-info" style="font-size:1.1em;">| Ajouter un prêt |</s:a>
-            </li>
-            <li class="nav-item">
-                    <s:a action="restituerPret" class="nav-link text-info" style="font-size:1.1em;">| Restituer un prêt |</s:a>
-            </li>
+                <li class="nav-item">
+                    <s:a action="consulterPret" class="nav-link text-info" style="font-size:0.9em;">| Consulter les prêts |</s:a>
+                </li>
+                <li class="nav-item">
+                    <s:a action="rechercheAbonneResa" class="nav-link text-info" style="font-size:0.9em;">| Consulter les réservations |</s:a>
+                </li>
+                <li class="nav-item">
+                    <s:a action="ajouterPret" class="nav-link text-info" style="font-size:0.9em;">| Ajouter un prêt |</s:a>
+                </li>
+                <li class="nav-item">
+                    <s:a action="restituerPret" class="nav-link text-info" style="font-size:0.9em;">| Restituer un prêt |</s:a>
+                </li>
             </s:if>
         </ul>
         <form class="form-inline my-2 my-lg-0" style="color: white" >

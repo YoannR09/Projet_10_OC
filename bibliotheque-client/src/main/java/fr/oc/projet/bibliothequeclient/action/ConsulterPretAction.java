@@ -189,7 +189,7 @@ public class ConsulterPretAction extends ActionSupport {
      * @return
      */
     public String doProlongationPret() throws IOException {
-        propFile = new FileInputStream("C:/Users/Pierrosan/Documents/Projet_7_OC/resources/config.properties");
+        propFile = new FileInputStream("C:/Users/El-ra/Documents/Projet_10_OC/resources/config.properties");
         propConfig.load(propFile);
         pret = microServicePretProxy.getPret(pretId);
         Calendar cal = Calendar.getInstance();

@@ -10,7 +10,7 @@
    
    - Si expire est true on affiche un bouton disable.
    - Si expire est false on affiche le bouton qui permet de prolonger le prêt en cours;
-   
+
    ![automated like clockwork](./jspExpire.png)
    
     

@@ -11,13 +11,15 @@ public class LivreUnique {
     @GeneratedValue
     private int id;
 
-    private int numeroInterne;
+    private int numero;
 
     private int bibliothequeId;
 
     private int livreId;
 
     private Boolean disponible;
+
+    private Boolean sousReserve;
 
     public LivreUnique() {
     }
@@ -30,12 +32,12 @@ public class LivreUnique {
         this.id = id;
     }
 
-    public int getNumeroInterne() {
-        return numeroInterne;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNumeroInterne(int numeroInterne) {
-        this.numeroInterne = numeroInterne;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public int getBibliothequeId() {
@@ -62,14 +64,11 @@ public class LivreUnique {
         this.disponible = disponible;
     }
 
-    @Override
-    public String toString() {
-        return "LivreUnique{" +
-                "id=" + id +
-                ", numeroInterne=" + numeroInterne +
-                ", bibliothequeId=" + bibliothequeId +
-                ", livreId=" + livreId +
-                ", disponible=" + disponible +
-                '}';
+    public Boolean getSousReserve() {
+        return sousReserve;
+    }
+
+    public void setSousReserve(Boolean sousReserve) {
+        this.sousReserve = sousReserve;
     }
 }

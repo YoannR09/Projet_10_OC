@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceCategorie
  */
-@FeignClient(value = "microservice-categorie", url = "localhost:9090")
+@FeignClient(value = "microservice-categorie", url = "192.168.1.61:9090")
 public interface MicroServiceCategorieProxy {
 
     /**

@@ -109,10 +109,10 @@ public class EmployeTest {
     @Test
     public void dateentreeSettersGettersTest() {
         // GIVEN
-        employe.setDateentree(DATE);
+        employe.setDateEntree(DATE);
 
         // WHEN
-        Date date = employe.getDateentree();
+        Date date = employe.getDateEntree();
 
         // THEN
         assertEquals(date,DATE);
@@ -121,10 +121,10 @@ public class EmployeTest {
     @Test
     public void datesortieSettersGettersTest() {
         // GIVEN
-        employe.setDatesortie(DATE);
+        employe.setDateSortie(DATE);
 
         // WHEN
-        Date date = employe.getDatesortie();
+        Date date = employe.getDateSortie();
 
         // THEN
         assertEquals(date,DATE);

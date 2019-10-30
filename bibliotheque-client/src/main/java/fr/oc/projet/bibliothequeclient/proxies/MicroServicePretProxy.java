@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServicePret
  */
-@FeignClient(value = "microservice-pret",url = "localhost:9099")
+@FeignClient(value = "microservice-pret",url = "192.168.1.61:9099")
 public interface MicroServicePretProxy {
 
     /**

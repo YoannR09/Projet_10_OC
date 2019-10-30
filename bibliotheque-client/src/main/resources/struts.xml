@@ -8,6 +8,7 @@
     <constant name="struts.devMode" value="true" />
     <constant name="struts.objectFactory" value="spring" />
 
+
     <package name="base" abstract="true" extends="struts-default">
 
         <interceptors>
@@ -179,6 +180,30 @@
             <result name="error">/jsp/error/error.jsp</result>
         </action>
 
+        <action name="reserver" class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="doReservation">
+            <result>/jsp/reservation/reservation.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="doListResa" class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="doListResa">
+            <result>/jsp/reservation/reservation.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="listResa" class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="doListReservationDispo">
+            <result>/jsp/reservation/list.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="deleteReservation"
+                class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="doDeleteResa">
+            <result name="success">/jsp/reservation/reservation.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
 
         <action name="rechercheLivre"
                 class="fr.oc.projet.bibliothequeclient.action.AjouterPretAction"
@@ -191,6 +216,32 @@
                 class="fr.oc.projet.bibliothequeclient.action.AjouterPretAction"
                 method="doAbonne">
             <result name="success">/jsp/pret/selectionnerAbonne.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="addPretResa"
+                class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="doResaToPret">
+            <result name="success">/jsp/index.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="editResa"
+                class="fr.oc.projet.bibliothequeclient.action.ReservationAction"
+                method="editResa">
+            <result name="success">/jsp/reservation/creerResa.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="rechercheAbonneResa">
+            <result name="success">/jsp/reservation/selectionnerAbonne.jsp</result>
+            <result name="error">/jsp/error/error.jsp</result>
+        </action>
+
+        <action name="rechercheAbonneResaForm"
+                class="fr.oc.projet.bibliothequeclient.action.AjouterPretAction"
+                method="doAbonne">
+            <result name="success">/jsp/reservation/selectionnerAbonne.jsp</result>
             <result name="error">/jsp/error/error.jsp</result>
         </action>
 

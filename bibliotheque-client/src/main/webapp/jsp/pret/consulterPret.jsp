@@ -163,7 +163,7 @@
                         <td><s:property value="abonne.pseudo"/></td>
                         <td> <s:property value="livreUnique.livre.titre"/></td>
                         <td><s:property value="livreUnique.livre.isbn"/></td>
-                        <td><s:property value="livreUnique.numeroInterne"/></td>
+                        <td><s:property value="livreUnique.numero"/></td>
                         <td><s:property value="bibliotheque.nom"/></td>
                         <td><s:property value="dateEmprunt"/></td>
                         <td><s:property value="dateRestitution"/></td>
@@ -172,7 +172,8 @@
                         </s:if>
                         <s:else>
                             <s:if test="expire">
-                                <td id="tdBtnRenouv"><button type="button" class="btn btn-secondary" style="font-size:0.6em;" disabled><i class="fas fa-redo-alt"></i></button></td>
+                                <td id="tdBtnRenouv"><button type="button" class="btn btn-secondary" style="font-size:0.6em;" disabled>
+                                    <i class="fas fa-redo-alt"></i></button></td>
                             </s:if>
                             <s:else>
                                 <td id="tdBtnRenouv"><s:a action="prolongationPret" class="btn btn-info" style="font-size:0.6em;">

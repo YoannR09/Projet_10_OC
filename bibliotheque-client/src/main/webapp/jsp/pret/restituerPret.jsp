@@ -93,8 +93,8 @@
     <div id="barreDeRecherche" class="bg-light">
         <s:form id="formulaire" action="rechercheRestituerLivre" >
             <div class="input-group">
-                <input id="textNumInterne" name="numeroInterne" type="text" class="form-control" placeholder="Numéro interne" aria-label="Recipient's username" aria-describedby="basic-addon2" >
-                <span id="lastNumInterne"><s:property value="numeroInterne"/></span>
+                <input id="textNumInterne" name="numero" type="text" class="form-control" placeholder="Numéro interne" aria-label="Recipient's username" aria-describedby="basic-addon2" >
+                <span id="lastNumInterne"><s:property value="numero"/></span>
                 <input id="textCodeISBN" name="isbn" type="text" class="form-control" placeholder="Code ISBN" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <span id="lastIsbn"><s:property value="isbn"/></span>
                 <div class="input-group-append">
@@ -132,7 +132,7 @@
                         <td><s:property value="abonne.nom"/></td>
                         <td><s:property value="abonne.prenom"/></td>
                         <td><s:property value="livreUnique.livre.isbn"/></td>
-                        <td><s:property value="livreUnique.numeroInterne"/></td>
+                        <td><s:property value="livreUnique.numero"/></td>
                         <td><s:property value="bibliotheque.nom"/></td>
                         <td id="tdBtnRenouv"><s:a action="doRestitutionLivre" class="btn btn-info" style="font-size:0.6em;"><i class="fas fa-arrow-alt-circle-right"></i><s:param name="pretId" value="id"/></s:a></td>
                     </tr>

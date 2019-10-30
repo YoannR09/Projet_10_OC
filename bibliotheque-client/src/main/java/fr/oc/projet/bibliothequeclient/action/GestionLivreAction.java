@@ -3,12 +3,10 @@ package fr.oc.projet.bibliothequeclient.action;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import fr.oc.projet.bibliothequeclient.beans.Abonne;
-import fr.oc.projet.bibliothequeclient.beans.Categorie;
-import fr.oc.projet.bibliothequeclient.beans.Illustration;
-import fr.oc.projet.bibliothequeclient.beans.Livre;
+import fr.oc.projet.bibliothequeclient.beans.*;
 import fr.oc.projet.bibliothequeclient.proxies.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +16,7 @@ import java.util.List;
  * Classe qui gère le catalogue de livre.
  * Permet de faire des recherches de livres via plusieurs critères.
  */
+@Component
 public class GestionLivreAction extends ActionSupport {
 
     @Autowired
@@ -32,6 +31,10 @@ public class GestionLivreAction extends ActionSupport {
     private MicroServiceAbonneProxy microServiceAbonneProxy;
     @Autowired
     private MicroServiceBibliothequeProxy microServiceBibliothequeProxy;
+    @Autowired
+    private MicroServiceReservationProxy microServiceReservationProxy;
+    @Autowired
+    private MicroServicePretProxy microServicePretProxy;
 
     private             String                      titre;
     private             String                      auteur;
@@ -156,15 +159,47 @@ public class GestionLivreAction extends ActionSupport {
      * Méthode pour afficher les détails d'un livre.
      * @return
      */
+    // MODIF
     public String doDetailLivre(){
 
         livre = microServiceLivreProxy.getLivre(livreId);
         categorie = microServiceCategorieProxy.getCategorie(livre.getCategorieId());
         illustration = microServiceIllustrationProxy.getIllustration(livre.getIllustrationId());
-
         livreList = new ArrayList<>();
         for (int i = 1; i<4 ; i++){
             livreList.add(microServiceLivreProxy.getLivre(livreId));
+            try {
+                pseudo = (String) ActionContext.getContext().getSession().get("pseudo");
+                abonne = microServiceAbonneProxy.getAbonnePseudo(pseudo);
+                List<Reservation> listResa = microServiceReservationProxy.findByAbonneIdAndLivreId(abonne.getId(),livreId);
+                List<Pret> pList = microServicePretProxy.getListPretAbonne(abonne.getId());
+                Boolean livreEnPret = null;
+                for(Pret pret : pList){
+                    if(microServiceLivreUniqueProxy.findById(pret.getLivreUniqueId()).getLivreId() == livreId){
+                        livreEnPret = true;
+                    }
+                }
+                if (listResa.size() >= 1){
+                    this.addActionMessage(" Vous avez déjà une réservation en cours sur ce livre. ");
+                    livreList.get(i-1).setReservable(false);
+                }else if(listResa.size() == 0) {
+                    Integer nombreResa = microServiceReservationProxy.countReservationsByLivreIdAndBibliothequeId(livreId,i);
+                    Integer nombreExemplaire = microServiceLivreUniqueProxy.countLivreUniqueBibliothequeTotal(livreId,i);
+                    if(nombreResa >= nombreExemplaire*2){
+                        this.addActionMessage(" Trop de réservations en cours. ");
+                        livreList.get(i-1).setReservable(false);
+                    }else {
+                        if(livreEnPret){
+                            this.addActionMessage(" Vous avez déjà un prêt en cours sur ce livre. ");
+                            livreList.get(i-1).setReservable(false);
+                        }else {
+                            livreList.get(i-1).setReservable(true);
+                        }
+                    }
+                }
+            }catch (Exception e){
+                livreList.get(i-1).setReservable(true);
+            }
             livreList.get(i-1).setNbreDispo(microServiceLivreUniqueProxy.countLivreUniqueBibliothequeDisponible(livre.getId(),i));
         }
 
@@ -307,5 +342,4 @@ public class GestionLivreAction extends ActionSupport {
     public void setCategorieId(Integer categorieId) {
         this.categorieId = categorieId;
     }
-
 }

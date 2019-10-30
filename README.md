@@ -86,7 +86,4 @@
    Compte employé : el-rambo-poto@hotmail.fr  <br/>
    mot de passe : 123  <br/>
    
-   
-   # Changement apportés pour le release 2.0
-   
-    - Mise en place des tests unitaires.
+  
