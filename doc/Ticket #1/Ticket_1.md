@@ -3,14 +3,30 @@
           
 ### Etape 1 : "Modifcation UML de la nouvelle fonctionnalité"
 
-#### 1.
-    - Modifications et ajouts de plusieurs use case sur la partie UML.
+   - Modifications et ajouts de plusieurs use case sur la partie UML.
+   
+   ![automated like clockwork](image/uml_1.png)
+           
+   ![automated like clockwork](image/uml_2.png)
+           
+   ![automated like clockwork](image/uml_3.png)
+   - Ajout des fiches déscriptives et diagramme d'activité des nouveaux use case.
     
-#### 2.
-    - Mise en des fiches déscriptives et diagramme d'activité des nouveaux use case.
+   ![automated like clockwork](image/uml_4.png)
+               
+   ![automated like clockwork](image/uml_5.png)
     
-#### 3.
-    - Ajout de plusieurs wireframes.
+   - Ajout de plusieurs wireframes.
+    
+   ![automated like clockwork](image/wireframe_1.png)
+       
+   ![automated like clockwork](image/wireframe_2.png)
+       
+   ![automated like clockwork](image/wireframe_3.png)
+       
+   ![automated like clockwork](image/wireframe_4.png)
+       
+   ![automated like clockwork](image/wireframe_5.png)
     
 ### Etape 2 : "Mise en place de la nouvelle table."
 
@@ -41,9 +57,22 @@
  
     - Modification de la barre de navigation pour les employés et abonnés.
     - Ajout d'une page jsp pour consulter les réservations d'un abonné.
+    
+   ![automated like clockwork](image/image_resa_employe.png)
+   
     - Ajout d'une page jsp pour consulter ses réservations en cours.
+    
+   ![automated like clockwork](image/image_resa_abonne.png)
+       
+       
     - Modification d'une page jsp pour ajouter un bouton reserver.
+    
+   ![automated like clockwork](image/image_detail_livre.png)
+   
+    
     - Ajout d'une page jsp pour créer une réservation.
+    
+   ![automated like clockwork](image/image_edit_resa.png)
    
  ### Etape 3 : "Intégration de la nouvelle fonctionnalité"
 

@@ -149,7 +149,7 @@
                                 <s:if test="#session.user">
                                     <s:a action="editResa"  class="btn btn-outline-info">
                                         <s:param name="livreId" value="id"/>
-                                        <s:param name="bibliothequeId" value="2"/>
+                                        <s:param name="bibliothequeId" value="3"/>
                                         Réserver </s:a>
                                 </s:if>
                                 <s:else><s:a action="login"  class="btn btn-outline-info"> Réserver </s:a></s:else>

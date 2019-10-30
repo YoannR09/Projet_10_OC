@@ -237,11 +237,16 @@ public class ReservationAction extends ActionSupport {
         }else {
             duree = String.format("%.0f",listDiffOrdre.get(nbreFile))+" jour(s)";
         }
-        Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
+        try {
+            Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
+
         for (Pret pret:pretList){
             if (pret.getId()==pretFirst.getId()){
                 pret.setPlusTot(true);
             }
+        }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return result;
     }
