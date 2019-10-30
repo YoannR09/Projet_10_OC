@@ -114,7 +114,7 @@
                     <th scope="col">Bibliothèque</th>
                     <th scope="col">Position dans la file</th>
                     <th scope="col">Prochain retour</th>
-                    <th scope="col">Durée éstimée</th>
+                    <th scope="col">Durée estimée</th>
                     <th scope="col" id="thBtnRenouv">Retirer</th>
                 </tr>
                 </thead>

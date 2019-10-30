@@ -7,7 +7,6 @@ import fr.oc.projet.bibliothequeclient.proxies.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -32,26 +31,26 @@ public class ReservationAction extends ActionSupport {
     @Autowired
     MicroServiceCategorieProxy microServiceCategorieProxy;
 
-    private float diffDate;
-    private int livreId;
-    private int bibliothequeId;
-    private int abonneId;
-    private int livreUniqueId;
-    private int reservationId;
-    private int nbreFile;
-    private String duree;
-    private String pseudo;
-    private String email;
-    private String prenom;
-    private String nom;
-    private Abonne abonne;
-    private List<Reservation> listResa;
-    private List<Reservation> listResaDispo;
-    private List<Reservation> listResaNonDispo;
-    private List<LivreUnique> listLivreUnique;
-    private List<Abonne> abonneList;
-    private List<Categorie> categorieList;
-    private List<Pret> pretList;
+    private         float                   diffDate;
+    private         int                     livreId;
+    private         int                     bibliothequeId;
+    private         int                     abonneId;
+    private         int                     livreUniqueId;
+    private         int                     reservationId;
+    private         int                     nbreFile;
+    private         String                  duree;
+    private         String                  pseudo;
+    private         String                  email;
+    private         String                  prenom;
+    private         String                  nom;
+    private         Abonne                  abonne;
+    private         List<Reservation>       listResa;
+    private         List<Reservation>       listResaDispo;
+    private         List<Reservation>       listResaNonDispo;
+    private         List<LivreUnique>       listLivreUnique;
+    private         List<Abonne>            abonneList;
+    private         List<Categorie>         categorieList;
+    private         List<Pret>              pretList;
 
     private Properties propConfig = new Properties();
     private FileInputStream propFile ;
@@ -140,8 +139,8 @@ public class ReservationAction extends ActionSupport {
                     Date newDate = sdf.parse(sdf.format(new Date()));
                     long diff = pret.getDateRestitution().getTime() - newDate.getTime();
                     float resTemps = (diff / (1000*60*60*26));
-                    listDiff.put(resTemps,pret.getId());
                     listDiffOrdre.add(resTemps);
+                    listDiff.put(resTemps,pret.getId());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -150,7 +149,7 @@ public class ReservationAction extends ActionSupport {
             ValueComparator comparator = new ValueComparator(listDiff);
             TreeMap<Float,Integer> mapTriee = new TreeMap<>(comparator);
             mapTriee.putAll(listDiff);
-            Pret pretFirst = microServicePretProxy.getPret(mapTriee.firstEntry().getValue());
+            Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
             String prochainRetour = sdf.format(pretFirst.getDateRestitution());
             res.setRetour(prochainRetour);
             if(res.getPosition() > pretList.size()){
@@ -184,17 +183,17 @@ public class ReservationAction extends ActionSupport {
 
     public String doResaToPret() throws IOException {
         String result = ActionSupport.SUCCESS;
-        propFile = new FileInputStream("C:/Users/Pierrosan/Documents/Projet_10_OC/resources/config.properties");
+        propFile = new FileInputStream("C:/Users/El-ra/Documents/Projet_10_OC/resources/config.properties");
         propConfig.load(propFile);
         Pret pret = new Pret();
-        pret.setDateEmprunt(new Date());
         Calendar cal = Calendar.getInstance();
+        pret.setDateEmprunt(new Date());
         cal.setTime(pret.getDateEmprunt());
         cal.add(Calendar.DATE,Integer.parseInt(propConfig.getProperty("prolongation")));
-        pret.setDateRestitution(cal.getTime());
         pret.setProlongation(false);
-        pret.setLivreUniqueId(livreUniqueId);
+        pret.setDateRestitution(cal.getTime());
         pret.setAbonneId(abonneId);
+        pret.setLivreUniqueId(livreUniqueId);
         LivreUnique livreUnique = microServiceLivreUniqueProxy.findById(livreUniqueId);
         livreUnique.setDisponible(false);
         livreUnique.setSousReserve(false);
@@ -238,7 +237,7 @@ public class ReservationAction extends ActionSupport {
         }else {
             duree = String.format("%.0f",listDiffOrdre.get(nbreFile))+" jour(s)";
         }
-        Pret pretFirst = microServicePretProxy.getPret(mapTriee.firstEntry().getValue());
+        Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
         for (Pret pret:pretList){
             if (pret.getId()==pretFirst.getId()){
                 pret.setPlusTot(true);
@@ -408,18 +407,19 @@ public class ReservationAction extends ActionSupport {
     public void setPretList(List<Pret> pretList) {
         this.pretList = pretList;
     }
+
+    class ValueComparator implements Comparator<Float> {
+        Map<Float,Integer> base;
+
+        public ValueComparator(Map<Float,Integer> base){
+            this.base = base;
+        }
+
+        public int compare(Float a,Float b){
+            if (base.get(a) >= base.get(b)){
+                return -1;
+            }else return 1;
+        }
+    }
 }
 
-class ValueComparator implements Comparator<Float> {
-    Map<Float,Integer> base;
-
-    public ValueComparator(Map<Float,Integer> base){
-        this.base = base;
-    }
-
-    public int compare(Float a,Float b){
-        if (base.get(a) >= base.get(b)){
-            return -1;
-        }else return 1;
-    }
-}

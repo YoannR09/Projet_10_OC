@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * Classe pour récupèrer les données du MicroServiceEmploye
  */
-@FeignClient(value = "microservice-employe", url = "localhost:9087")
+@FeignClient(value = "microservice-employe", url = "192.168.1.61:9087")
 public interface MicroServiceEmployeProxy {
 
     /**

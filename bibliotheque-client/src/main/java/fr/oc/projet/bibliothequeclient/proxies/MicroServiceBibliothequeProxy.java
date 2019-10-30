@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceBibliotheque
  */
-@FeignClient(value = "microservice-bibliotheque", url = "localhost:9096")
+@FeignClient(value = "microservice-bibliotheque", url = "192.168.1.61:9096")
 public interface MicroServiceBibliothequeProxy {
 
     /**

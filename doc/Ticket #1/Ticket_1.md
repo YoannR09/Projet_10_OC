@@ -45,7 +45,7 @@
     - Modification d'une page jsp pour ajouter un bouton reserver.
     - Ajout d'une page jsp pour créer une réservation.
    
- ### Etape 3 : "Intégration de la nouvelle fonctionnalité dans le code"
+ ### Etape 3 : "Intégration de la nouvelle fonctionnalité"
 
     - Ajout d'un bean de l'objet réservation.
     - Ajout d'une classe action pour la partie réservation.

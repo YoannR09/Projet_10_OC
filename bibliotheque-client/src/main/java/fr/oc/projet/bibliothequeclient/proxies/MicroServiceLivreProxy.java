@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceLivre
  */
-@FeignClient(name = "microservice-livre", url = "localhost:9094")
+@FeignClient(name = "microservice-livre", url = "192.168.1.61:9094")
 public interface MicroServiceLivreProxy {
 
     /**

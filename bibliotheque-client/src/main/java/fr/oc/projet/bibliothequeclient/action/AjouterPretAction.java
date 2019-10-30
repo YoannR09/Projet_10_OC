@@ -177,7 +177,7 @@ public class AjouterPretAction extends ActionSupport {
     public String doAjouterPret(){
         String vResult;
         try {
-        propFile = new FileInputStream("C:/Users/Pierrosan/Documents/Projet_10_OC/resources/config.properties");
+        propFile = new FileInputStream("C:/Users/El-ra/Documents/Projet_10_OC/resources/config.properties");
         propConfig.load(propFile);
         Pret pret = new Pret();
         pret.setDateEmprunt(new Date());

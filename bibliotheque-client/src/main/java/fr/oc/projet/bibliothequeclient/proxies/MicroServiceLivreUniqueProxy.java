@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceLivreUnique
  */
-@FeignClient(name = "microservice-livre-unique", url = "localhost:9098")
+@FeignClient(name = "microservice-livre-unique", url = "192.168.1.61:9098")
 public interface MicroServiceLivreUniqueProxy {
 
     @GetMapping(value = "/LivreUnique/{id}")
