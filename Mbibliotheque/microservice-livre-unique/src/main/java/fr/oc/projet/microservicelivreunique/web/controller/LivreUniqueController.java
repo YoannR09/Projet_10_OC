@@ -340,6 +340,19 @@ public class LivreUniqueController {
         }
     }
 
+    /**
+     * Méthode pour supprimer un exemplaire
+     * @param id
+     */
+    @DeleteMapping(value = "/LivreUnique/{id}")
+    public void delete(@PathVariable Integer id){
+        try {
+            getLivreUniqueDao().deleteById(id);
+        }catch (Exception e){
+            getLogger().error("Methode delete() erreur : "+e);
+        }
+    }
+
     protected LivreUniqueDao getLivreUniqueDao() {
         return livreUniqueDao;
     }

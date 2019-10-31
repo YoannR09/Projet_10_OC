@@ -2,6 +2,8 @@ package fr.oc.projet.microservicereservation.controller;
 
 import fr.oc.projet.microservicereservation.dao.ReservationDao;
 import fr.oc.projet.microservicereservation.model.Reservation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,8 @@ public class ReservationController {
     @Autowired
     private ReservationDao dao;
 
+    private static Logger logger = LogManager.getLogger();
+
     /**
      * Méthode pour récupérer une réservation via un id.
      * @param id
@@ -20,12 +24,17 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/{id}")
     public Reservation getReservation(@PathVariable int id){
-        return dao.findById(id);
+        return getDao().findById(id);
     }
 
     @GetMapping(value = "/Reservation/CountLivreBibliotheque/{livreId},{bibliothequeId}")
     public Integer countReservationsByLivreIdAndBibliothequeId(@PathVariable int livreId,@PathVariable int bibliothequeId){
-        return dao.countReservationsByLivreIdAndBibliothequeId(livreId,bibliothequeId);
+        try {
+            return getDao().countReservationsByLivreIdAndBibliothequeId(livreId, bibliothequeId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
 
@@ -36,7 +45,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/Bibliotheque/{bibliothequeId}")
     public List<Reservation> findByBibliothequeId(@PathVariable int bibliothequeId){
-        return dao.findByBibliothequeId(bibliothequeId);
+        try {
+            return getDao().findByBibliothequeId(bibliothequeId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -46,7 +60,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/Abonne/{abonneId}")
     public List<Reservation> findByAbonneId(@PathVariable int abonneId){
-        return dao.findByAbonneId(abonneId);
+        try {
+            return getDao().findByAbonneId(abonneId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -57,7 +76,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/BibliothequeAbonne/{bibliothequeId},{abonneId}")
     public List<Reservation> findByBibliothequeIdAndAbonneId(@PathVariable int bibliothequeId,@PathVariable int abonneId){
-        return dao.findByBibliothequeIdAndAbonneId(bibliothequeId,abonneId);
+        try {
+            return getDao().findByBibliothequeIdAndAbonneId(bibliothequeId, abonneId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -69,7 +93,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/BibliothequeAbonneLivre/{bibliothequeId},{abonneId},{livreId}")
     public List<Reservation> findByBibliothequeIdAndAbonneIdAndLivreId(@PathVariable int bibliothequeId,@PathVariable int abonneId,@PathVariable int livreId){
-        return dao.findByBibliothequeIdAndAbonneIdAndLivreId(bibliothequeId,abonneId,livreId);
+        try {
+            return getDao().findByBibliothequeIdAndAbonneIdAndLivreId(bibliothequeId, abonneId, livreId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -80,7 +109,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/BibliothequeLivre/{bibliothequeId},{livreId}")
     public List<Reservation> findByBibliothequeIdAndLivreId(@PathVariable int bibliothequeId,@PathVariable int livreId){
-        return dao.findByBibliothequeIdAndLivreId(bibliothequeId,livreId);
+        try {
+            return getDao().findByBibliothequeIdAndLivreId(bibliothequeId, livreId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -91,7 +125,12 @@ public class ReservationController {
      */
     @GetMapping(value = "/Reservation/AbonneLivre/{abonneId},{livreId}")
     public List<Reservation> findByAbonneIdAndLivreId(@PathVariable int abonneId,@PathVariable int livreId){
-        return dao.findByAbonneIdAndLivreId(abonneId,livreId);
+        try {
+            return getDao().findByAbonneIdAndLivreId(abonneId, livreId);
+        }catch (Exception e){
+            getLogger().warn(e);
+            return null;
+        }
     }
 
     /**
@@ -100,7 +139,11 @@ public class ReservationController {
      */
     @DeleteMapping(value = "/Reservation/{id}")
     public void delete(@PathVariable int id){
-        dao.deleteById(id);
+        try {
+            getDao().deleteById(id);
+        }catch (Exception e){
+            getLogger().warn(e);
+        }
     }
 
     /**
@@ -109,7 +152,11 @@ public class ReservationController {
      */
     @PostMapping(value = "/Reservation")
     public void addReservation(@RequestBody Reservation reservation){
-        dao.save(reservation);
+        try {
+            getDao().save(reservation);
+        }catch (Exception e){
+            getLogger().warn(e);
+        }
     }
 
     /**
@@ -118,6 +165,18 @@ public class ReservationController {
      */
     @PutMapping(value = "/Reservation")
     public void updateReservation(@RequestBody Reservation reservation){
-        dao.save(reservation);
+        try {
+            getDao().save(reservation);
+        }catch (Exception e){
+            getLogger().warn(e);
+        }
+    }
+
+    protected Logger getLogger() {
+        return logger;
+    }
+
+    protected ReservationDao getDao() {
+        return dao;
     }
 }

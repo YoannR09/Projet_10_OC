@@ -76,6 +76,19 @@ public class AdresseController {
         }
     }
 
+    /**
+     * Méthode pour supprimer une adresse
+     * @param id
+     */
+    @DeleteMapping(value = "/Adresse/{id}")
+    public void delete(@PathVariable Integer id){
+        try {
+            getAdresseDao().deleteById(id);
+        }catch (Exception e){
+            getLogger().error("Methode delete() erreur : "+e);
+        }
+    }
+
     protected AdresseDao getAdresseDao() {
         return adresseDao;
     }
