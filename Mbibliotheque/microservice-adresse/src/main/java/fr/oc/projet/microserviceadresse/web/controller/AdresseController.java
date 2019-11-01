@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class AdresseController {
 
@@ -26,6 +28,16 @@ public class AdresseController {
             return getAdresseDao().findById(id);
         }catch (Exception e){
             getLogger().error("Methode getAdresse() erreur : "+e);
+            return null;
+        }
+    }
+
+    @GetMapping(value = "/Adresse")
+    public List<Adresse> getListAdresse(){
+        try {
+            return getAdresseDao().findAll();
+        }catch (Exception e){
+            logger.warn(e);
             return null;
         }
     }
@@ -73,6 +85,19 @@ public class AdresseController {
             getAdresseDao().save(adresse);
         }catch (Exception e){
             getLogger().error("Methode updateAdresse() erreur : "+e);
+        }
+    }
+
+    /**
+     * Méthode pour supprimer une adresse
+     * @param id
+     */
+    @DeleteMapping(value = "/Adresse/{id}")
+    public void delete(@PathVariable Integer id){
+        try {
+            getAdresseDao().deleteById(id);
+        }catch (Exception e){
+            getLogger().error("Methode delete() erreur : "+e);
         }
     }
 

@@ -345,6 +345,19 @@ public class AbonneController {
         }
     }
 
+    /**
+     * Méthode pour supprimer un abonné via un id.
+     * @param id
+     */
+    @DeleteMapping(value = "/Abonne/{id}")
+    public void delete(@PathVariable Integer id){
+        try {
+            getAbonneDao().deleteById(id);
+        }catch (Exception e){
+            getLogger().error("Méthode délete erreur : "+e);
+        }
+    }
+
     protected Logger getLogger() {
         return logger;
     }
