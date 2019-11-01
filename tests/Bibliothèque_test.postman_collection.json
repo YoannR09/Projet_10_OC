@@ -1,0 +1,1341 @@
+{
+	"info": {
+		"_postman_id": "edcd68ab-4e17-4479-97c6-d963bfdbf619",
+		"name": "Bibliothèque_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addAbonne",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e07b834-77c2-478c-b33b-863a110e8359",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"post\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "93a5910e-5fd7-4f62-a4fd-45ce799add6c",
+						"exec": [
+							"console.log(responseBody)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": -2,\r\n        \"pseudo\": \"Test\",\r\n        \"email\": \"Test@gmail.com\",\r\n        \"motDePasse\": \"123\",\r\n        \"nom\": \"ROCHE\",\r\n        \"prenom\": \"Yoann\",\r\n        \"numeroTelephone\": \"0605097496\",\r\n        \"adresseId\": 1,\r\n        \"roleId\": 2,\r\n        \"bibliothequeId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9097/Abonne",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9097",
+					"path": [
+						"Abonne"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAbonne",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "caf77418-cc16-41ea-a694-4f04ed523bfc",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"abonneId\",json[json.length-1].id);",
+							"console.log(pm.environment.get(\"abonneId\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1bc9c237-7a10-413c-a485-21085816b35b",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9097/Abonne",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9097",
+					"path": [
+						"Abonne"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Abonne",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "da5a3c6a-cd04-45e2-b456-cba3a94c4573",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "de92d363-e747-4712-821c-92808f47f55a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9097/Abonne/{{abonneId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9097",
+					"path": [
+						"Abonne",
+						"{{abonneId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAbonne",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ed176ee4-1041-4a52-b994-8b8c260364a3",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"put\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n        \"id\": {{abonneId}},\r\n        \"pseudo\": \"TestPut\",\r\n        \"email\": \"TestPut@gmail.com\",\r\n        \"motDePasse\": \"123\",\r\n        \"nom\": \"ROCHE\",\r\n        \"prenom\": \"Yoann\",\r\n        \"numeroTelephone\": \"0605097496\",\r\n        \"adresseId\": 1,\r\n        \"roleId\": 2,\r\n        \"bibliothequeId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9097/Abonne",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9097",
+					"path": [
+						"Abonne"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAbonne",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "7575624d-6af2-4ae3-8ea5-0cdc65e3a4de",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"delete\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://192.168.1.61:9097/Abonne/{{abonneId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9097",
+					"path": [
+						"Abonne",
+						"{{abonneId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addAdresse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f856bce-ea9e-44be-bdbd-d755888e26cc",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"post\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": -2,\r\n    \"numero\": \"401F\",\r\n    \"rue\": \"Chemin de la bergerie\",\r\n    \"codePostal\": \"83110\",\r\n    \"ville\": \"Sanary\",\r\n    \"pays\": \"France\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9095/Adresse",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9095",
+					"path": [
+						"Adresse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListAdresse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "abfd94e8-b47d-4ffd-be1f-6dce613d12e4",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5752f3b-3d99-47e8-a796-c4ebdd561c0e",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"adresseId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9095/Adresse",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9095",
+					"path": [
+						"Adresse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adresse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2cc89d00-1b30-4b5a-a07e-84796daa0a0b",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9095/Adresse/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9095",
+					"path": [
+						"Adresse",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAdresse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "345758b5-d01f-4fdd-9663-5c52b03696f9",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"put\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": {{adresseId}},\r\n    \"numero\": \"34\",\r\n    \"rue\": \"Chemin du Test\",\r\n    \"codePostal\": \"83110\",\r\n    \"ville\": \"Sanary\",\r\n    \"pays\": \"France\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9095/Adresse",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9095",
+					"path": [
+						"Adresse"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAdresse",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "002f64ab-1fb8-46cf-b089-e6d50eec03ac",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"delete\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9095/Adresse/{{adresseId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9095",
+					"path": [
+						"Adresse",
+						"{{adresseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListBibliotheque",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "af2eb1ca-d3cd-4f91-907d-110674705493",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f59a72a6-0483-47c1-a87b-5e03530439a6",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"bibliothequeId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9096/Bibliotheque",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9096",
+					"path": [
+						"Bibliotheque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bibliotheque",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3bcdb29b-89f4-4028-96e7-9c3623e658f9",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9096/Bibliotheque/Id/{{bibliothequeId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9096",
+					"path": [
+						"Bibliotheque",
+						"Id",
+						"{{bibliothequeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListCategorie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a8243f9b-df84-4f73-9a41-1e822d6787b4",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "45d72d3f-8a68-4895-a869-31edb1016c80",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"categorieId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9090/Categorie",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9090",
+					"path": [
+						"Categorie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categorie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e8335e8-bbd9-44b9-8684-78814c6f3d5e",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9090/Categorie/{{categorieId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9090",
+					"path": [
+						"Categorie",
+						"{{categorieId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employe",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0245839e-be69-4387-ba2c-b4bb3e860f40",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9087/Employe/Id/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9087",
+					"path": [
+						"Employe",
+						"Id",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Illustration",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "187406c4-1dfd-4124-b269-f0af0d674331",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9093/Illustration/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9093",
+					"path": [
+						"Illustration",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListLivreCategorie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "316a3065-ac78-497f-9fcc-527ce7ecd7ea",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6bc04124-bae2-4281-bf65-479120846a1c",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"livreId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9094/Livre/Categorie/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9094",
+					"path": [
+						"Livre",
+						"Categorie",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Livre",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ef0b311c-faaf-4fed-a33f-bf04709de838",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9094/Livre/{{livreId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9094",
+					"path": [
+						"Livre",
+						"{{livreId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListLivreUnique",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ae8a2af1-1194-4606-aedb-03bae751d8e1",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e0aa0c3-a711-46b9-a3f6-d95ccc8c8f62",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"livreUniqueId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9098/LivreUnique",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9098",
+					"path": [
+						"LivreUnique"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LivreUnique",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1ceceafd-c2ea-4552-9951-ed4ecc9e2b62",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9098/LivreUnique/{{livreUniqueId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9098",
+					"path": [
+						"LivreUnique",
+						"{{livreUniqueId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPret",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "06dc2527-ed96-4bc3-a079-1a42bcc9f54d",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"post\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": -2,\r\n        \"dateEmprunt\": \"2019-10-28T23:00:00.000+0000\",\r\n        \"dateRestitution\": \"2019-11-25T23:00:00.000+0000\",\r\n        \"prolongation\": false,\r\n        \"abonneId\": 1,\r\n        \"livreUniqueId\": 1\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9099/Pret",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9099",
+					"path": [
+						"Pret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListPret",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "482b5e32-faa9-4a5b-8483-c36eecb3fd7b",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8bbc1d7-39f3-49a4-b210-734b100a1c5c",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"pretId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9099/Pret",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9099",
+					"path": [
+						"Pret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pret",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6e17006f-e458-46d8-b397-7d06d4964efa",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9099/Pret/{{pretId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9099",
+					"path": [
+						"Pret",
+						"{{pretId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePret",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bb4966d3-f7a2-4d22-8dba-8d21fe757da4",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"put\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": {{pretId}},\r\n        \"dateEmprunt\": \"2019-10-28T23:00:00.000+0000\",\r\n        \"dateRestitution\": \"2019-11-25T23:00:00.000+0000\",\r\n        \"prolongation\": true,\r\n        \"abonneId\": 1,\r\n        \"livreUniqueId\": 1\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9099/Pret",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9099",
+					"path": [
+						"Pret"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePret",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "170e1909-10b4-4e81-976e-b71415649f32",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"delete\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9099/Pret/{{pretId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9099",
+					"path": [
+						"Pret",
+						"{{pretId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addReservation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c890470-5624-42a5-9dd2-c22961917463",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"post\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"id\": -2,\r\n        \"abonneId\": 1,\r\n        \"livreId\": 1,\r\n        \"bibliothequeId\": 1,\r\n        \"livreUniqueId\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9085/Reservation",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9085",
+					"path": [
+						"Reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListReservation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3723a993-cb44-455a-ad07-4e98c85a6a60",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"list\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd2bdf69-5fde-4c23-8bd8-5dabe54af29f",
+						"exec": [
+							"json = JSON.parse(responseBody);",
+							"pm.environment.set(\"reservationId\",json[json.length-1].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9085/Reservation",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9085",
+					"path": [
+						"Reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reservation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "782a8053-a50a-4b37-a06c-d0bba3ef854e",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"seul\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9085/Reservation/{{reservationId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9085",
+					"path": [
+						"Reservation",
+						"{{reservationId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateReservation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "35974a55-e140-4b3a-aceb-4203782dcf81",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"put\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n        \"id\": {{reservationId}},\r\n        \"abonneId\": 1,\r\n        \"livreId\": 1,\r\n        \"bibliothequeId\": 1,\r\n        \"livreUniqueId\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.61:9085/Reservation",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9085",
+					"path": [
+						"Reservation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteReservation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "edfdc07f-df6e-4d04-b4ce-56111c2977ef",
+						"exec": [
+							"pm.environment.set(\"testGroup\", \"delete\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.61:9085/Reservation/{{reservationId}}",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"61"
+					],
+					"port": "9085",
+					"path": [
+						"Reservation",
+						"{{reservationId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "50fbfab7-0dbf-4deb-8197-d19eae9e1922",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ae7b1912-479c-4d6d-a3a8-066b3e579ee2",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"if(pm.environment.get(\"testGroup\") === \"list\")",
+					"{",
+					"    pm.test(\" C'est bien une liste qui est retourné \", function(){",
+					"    pm.expect(pm.response.json()).to.be.an('array');",
+					"});",
+					"}",
+					"",
+					"if(pm.environment.get(\"testGroup\") === \"add\")",
+					"{",
+					"   pm.test(\"Successful POST request\", function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+					"});",
+					"}",
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

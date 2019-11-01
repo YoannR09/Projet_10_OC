@@ -87,3 +87,9 @@
    mot de passe : 123  <br/>
    
   
+  # Test d'intégrations
+  
+  - Installer Node.js 
+  - Installer newman avec la commande suivante :
+  - Se placer dans le fichier principal du projet.
+  - Lancer la commande suivante : newman run tests/Bibliothèque_test.postman_collection.json

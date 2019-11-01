@@ -37,6 +37,20 @@ public class ReservationController {
         }
     }
 
+    /**
+     * Méthode pour récupérer la liste des réservations.
+     * @return
+     */
+    @GetMapping(value = "/Reservation")
+    public List<Reservation> getListReservation(){
+        try {
+            return getDao().findAll();
+        }catch (Exception e){
+            logger.warn(e);
+            return null;
+        }
+    }
+
 
     /**
      * Méthode pour récupérer une liste de réservation via l'id d'une bibliotheque.
