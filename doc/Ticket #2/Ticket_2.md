@@ -6,11 +6,11 @@
    - Compare la date actuel et celle de restitution du prêt.
    - En fonction du résultat l'objet expire est vrai ou faux.
    
-   ![automated like clockwork](./compareDate.png)
+   ![automated like clockwork](image/image_1.png)
    
    - Si expire est true on affiche un bouton disable.
    - Si expire est false on affiche le bouton qui permet de prolonger le prêt en cours;
 
-   ![automated like clockwork](./jspExpire.png)
+   ![automated like clockwork](image/image_2.png)
    
     

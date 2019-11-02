@@ -88,8 +88,8 @@
    
   
   # Test d'intégrations
-  
+  Pour lancer les tests des microservices sur votre machine suivre ces étapes :
   - Installer Node.js 
-  - Installer newman avec la commande suivante :
+  - Installer newman avec la commande suivante : npm install -g newman
   - Se placer dans le fichier principal du projet.
   - Lancer la commande suivante : newman run tests/Bibliothèque_test.postman_collection.json
