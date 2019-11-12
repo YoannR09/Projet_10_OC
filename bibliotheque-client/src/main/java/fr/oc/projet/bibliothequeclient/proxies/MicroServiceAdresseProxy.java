@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Classe pour récupèrer les données du MicroServiceAdresse
  */
-@FeignClient(value = "microservice-adresse", url = "localhost:9095")
+@FeignClient(value = "microservice-adresse", url = "192.168.1.61:9095")
 public interface MicroServiceAdresseProxy {
 
 

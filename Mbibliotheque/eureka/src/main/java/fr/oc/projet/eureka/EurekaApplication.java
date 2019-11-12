@@ -20,6 +20,8 @@ public class EurekaApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+
+
 		logger.info("Eureka lancé");
 	}
 }

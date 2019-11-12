@@ -149,7 +149,7 @@ public class ReservationAction extends ActionSupport {
             }
             Collections.sort(listDiffOrdre);
             ValueComparator comparator = new ValueComparator(listDiff);
-            TreeMap<Float,Integer> mapTriee = new TreeMap<>(comparator);
+            TreeMap<Float,Integer> mapTriee = new TreeMap(comparator);
             mapTriee.putAll(listDiff);
             Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
             String prochainRetour = sdf.format(pretFirst.getDateRestitution());
@@ -223,7 +223,7 @@ public class ReservationAction extends ActionSupport {
             try{
                 Date newDate = sdf.parse(sdf.format(new Date()));
                 long diff = pret.getDateRestitution().getTime() - newDate.getTime();
-                float res = (diff / (1000*60*60*26));
+                float res = (diff / (1000*60*60*24));
                 listDiff.put(res,pret.getId());
                 listDiffOrdre.add(res);
             }catch (Exception e){
@@ -242,10 +242,10 @@ public class ReservationAction extends ActionSupport {
             duree = String.format("%.0f",listDiffOrdre.get(nbreFile))+" jour(s)";
         }
         try {
-            Pret pretFirst = microServicePretProxy.getPret(mapTriee.lastEntry().getValue());
+            Pret pretFirst = microServicePretProxy.getPret(mapTriee.firstEntry().getValue());
 
         for (Pret pret:pretList){
-            if (pret.getId()==pretFirst.getId()){
+            if (pret.getId() == pretFirst.getId()){
                 pret.setPlusTot(true);
             }
         }
@@ -441,9 +441,7 @@ public class ReservationAction extends ActionSupport {
         }
 
         public int compare(Float a,Float b){
-            if (base.get(a) >= base.get(b)){
-                return -1;
-            }else return 1;
+                return base.get(a).compareTo(base.get(b));
         }
     }
 }

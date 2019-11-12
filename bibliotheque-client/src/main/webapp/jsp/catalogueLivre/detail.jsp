@@ -84,7 +84,7 @@
                 <img  src="../image/<s:property value="illustration.url"/>" class="border border-secondary" style="height: 400px"
                      alt="<s:property value="illustration.description"/>">
                 </div>
-                <div class="col-5 border-left" style="margin-top: 20px;text-align: center">
+                <div class="col-5" style="margin-top: 20px;text-align: center">
                     <p style="text-align: center;font-size: 1.2em"><em>Informations sur le produit</em></p>
                     <p><em>Titre :  </em><s:property value="livre.titre"/></p>
                     <p><em>Auteur :  </em><s:property value="livre.auteur"/></p>
