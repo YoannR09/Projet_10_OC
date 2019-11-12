@@ -18,14 +18,16 @@
     
    - Ajout de plusieurs wireframes.
     
+   Détails du livre
    ![automated like clockwork](image/wireframe_1.png)
        
+   Affichage de la page de réservation après avoir cliquer sur "reserver"
    ![automated like clockwork](image/wireframe_2.png)
-       
+   Affichage du page pour sélectionner un abonné pour consulter ses réservations
    ![automated like clockwork](image/wireframe_3.png)
-       
+   Affichage des réservations d'un abonné depuis la vue d'un employé
    ![automated like clockwork](image/wireframe_4.png)
-       
+   Affichage des réservations d'un abonné depuis la vue de l'abonné
    ![automated like clockwork](image/wireframe_5.png)
     
 ### Etape 2 : "Mise en place de la nouvelle table."

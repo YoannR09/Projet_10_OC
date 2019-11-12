@@ -52,7 +52,7 @@
             </interceptor-stack>
         </interceptors>
 
-        <default-action-ref name="index" />
+        <default-action-ref name="index"/>
 
         <action name="formInscription" class="fr.oc.projet.bibliothequeclient.action.LoginAction" method="pageIncription">
             <result name="success">/jsp/login/inscription.jsp</result>

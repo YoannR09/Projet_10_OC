@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceAbonne
  */
-@FeignClient(value = "microservice-abonne", url = "192.168.1.61:9097")
+@FeignClient(value = "microservice-abonne", url = "localhost:9097")
 public interface MicroServiceAbonneProxy {
 
     /**

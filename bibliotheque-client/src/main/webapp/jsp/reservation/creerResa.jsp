@@ -99,7 +99,6 @@
                             </td>
                         </tr>
                     </s:else>
-
                 </s:iterator>
                 </tbody>
             </table>
@@ -110,6 +109,8 @@
         <div id="cadreResa" class="col-3 card text-center" style="padding-bottom: 15px">
             <label class="form-check-label" id="labelResa"> Votre réservation </label>
             <div style="width: 100%" class="card-body">
+                <p>Nom du livre <s:property value="livre.titre"/></p>
+                <p>Dans la bibliothèque : <s:property value="bibliotheque.nom"/></p>
                 <p style="margin-top: 20px">Personne(s) dans la file : <s:property value="nbreFile"/></p>
                 <p>Durée estimée : <s:property value="duree"/></p>
             </div>

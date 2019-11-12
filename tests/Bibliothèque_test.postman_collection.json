@@ -9,22 +9,21 @@
 			"name": "addAbonne",
 			"event": [
 				{
-					"listen": "prerequest",
+					"listen": "test",
 					"script": {
-						"id": "2e07b834-77c2-478c-b33b-863a110e8359",
+						"id": "850744fe-5b7b-463c-baa6-4844f8a24c37",
 						"exec": [
-							"pm.environment.set(\"testGroup\", \"post\");",
 							""
 						],
 						"type": "text/javascript"
 					}
 				},
 				{
-					"listen": "test",
+					"listen": "prerequest",
 					"script": {
-						"id": "93a5910e-5fd7-4f62-a4fd-45ce799add6c",
+						"id": "031ba76f-0f9a-461b-8255-17b608590242",
 						"exec": [
-							"console.log(responseBody)",
+							"pm.environment.set(\"testGroup\", \"post\");",
 							""
 						],
 						"type": "text/javascript"
@@ -51,13 +50,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9097/Abonne",
+					"raw": "http://localhost:9097/Abonne",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9097",
 					"path": [
@@ -73,11 +69,10 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "caf77418-cc16-41ea-a694-4f04ed523bfc",
+						"id": "04470812-58b7-4e45-a5d5-10b814f93130",
 						"exec": [
 							"json = JSON.parse(responseBody);",
-							"pm.environment.set(\"abonneId\",json[json.length-1].id);",
-							"console.log(pm.environment.get(\"abonneId\"));"
+							"pm.environment.set(\"abonneId\",json[json.length-1].id);"
 						],
 						"type": "text/javascript"
 					}
@@ -85,7 +80,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "1bc9c237-7a10-413c-a485-21085816b35b",
+						"id": "ff5be84f-cbd2-4d1c-bc82-c490c083a519",
 						"exec": [
 							"pm.environment.set(\"testGroup\", \"list\");"
 						],
@@ -104,13 +99,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9097/Abonne",
+					"raw": "http://localhost:9097/Abonne",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9097",
 					"path": [
@@ -149,13 +141,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9097/Abonne/{{abonneId}}",
+					"raw": "http://localhost:9097/Abonne/{{abonneId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9097",
 					"path": [
@@ -200,13 +189,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9097/Abonne",
+					"raw": "http://localhost:9097/Abonne",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9097",
 					"path": [
@@ -241,15 +227,11 @@
 					}
 				],
 				"url": {
-					"raw": "http://192.168.1.61:9097/Abonne/{{abonneId}}",
+					"raw": "http://localhost/Abonne/{{abonneId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
-					"port": "9097",
 					"path": [
 						"Abonne",
 						"{{abonneId}}"
@@ -292,13 +274,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9095/Adresse",
+					"raw": "http://localhost:9095/Adresse",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9095",
 					"path": [
@@ -337,13 +316,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9095/Adresse",
+					"raw": "http://localhost:9095/Adresse",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9095",
 					"path": [
@@ -371,18 +347,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9095/Adresse/1",
+					"raw": "http://localhost:9095/Adresse/{{adresseId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9095",
 					"path": [
 						"Adresse",
-						"1"
+						"{{adresseId}}"
 					]
 				}
 			},
@@ -422,13 +395,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9095/Adresse",
+					"raw": "http://localhost:9095/Adresse",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9095",
 					"path": [
@@ -456,13 +426,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9095/Adresse/{{adresseId}}",
+					"raw": "http://localhost:9095/Adresse/{{adresseId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9095",
 					"path": [
@@ -502,13 +469,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9096/Bibliotheque",
+					"raw": "http://localhost:9096/Bibliotheque",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9096",
 					"path": [
@@ -536,13 +500,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9096/Bibliotheque/Id/{{bibliothequeId}}",
+					"raw": "http://localhost:9096/Bibliotheque/Id/{{bibliothequeId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9096",
 					"path": [
@@ -583,13 +544,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9090/Categorie",
+					"raw": "http://localhost:9090/Categorie",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9090",
 					"path": [
@@ -617,13 +575,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9090/Categorie/{{categorieId}}",
+					"raw": "http://localhost:9090/Categorie/{{categorieId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9090",
 					"path": [
@@ -652,13 +607,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9087/Employe/Id/1",
+					"raw": "http://localhost:9087/Employe/Id/1",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9087",
 					"path": [
@@ -688,13 +640,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9093/Illustration/1",
+					"raw": "http://localhost:9093/Illustration/1",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9093",
 					"path": [
@@ -734,13 +683,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9094/Livre/Categorie/1",
+					"raw": "http://localhost:9094/Livre/Categorie/1",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9094",
 					"path": [
@@ -770,13 +716,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9094/Livre/{{livreId}}",
+					"raw": "http://localhost:9094/Livre/{{livreId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9094",
 					"path": [
@@ -816,13 +759,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9098/LivreUnique",
+					"raw": "http://localhost:9098/LivreUnique",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9098",
 					"path": [
@@ -850,13 +790,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9098/LivreUnique/{{livreUniqueId}}",
+					"raw": "http://localhost:9098/LivreUnique/{{livreUniqueId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9098",
 					"path": [
@@ -901,13 +838,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9099/Pret",
+					"raw": "http://localhost:9099/Pret",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9099",
 					"path": [
@@ -946,13 +880,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9099/Pret",
+					"raw": "http://localhost:9099/Pret",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9099",
 					"path": [
@@ -980,13 +911,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9099/Pret/{{pretId}}",
+					"raw": "http://localhost:9099/Pret/{{pretId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9099",
 					"path": [
@@ -1031,13 +959,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9099/Pret",
+					"raw": "http://localhost:9099/Pret",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9099",
 					"path": [
@@ -1065,13 +990,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9099/Pret/{{pretId}}",
+					"raw": "http://localhost:9099/Pret/{{pretId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9099",
 					"path": [
@@ -1116,13 +1038,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9085/Reservation",
+					"raw": "http://localhost:9085/Reservation",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9085",
 					"path": [
@@ -1161,13 +1080,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9085/Reservation",
+					"raw": "http://localhost:9085/Reservation",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9085",
 					"path": [
@@ -1195,13 +1111,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9085/Reservation/{{reservationId}}",
+					"raw": "http://localhost:9085/Reservation/{{reservationId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9085",
 					"path": [
@@ -1246,13 +1159,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.61:9085/Reservation",
+					"raw": "http://localhost:9085/Reservation",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9085",
 					"path": [
@@ -1280,13 +1190,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.1.61:9085/Reservation/{{reservationId}}",
+					"raw": "http://localhost:9085/Reservation/{{reservationId}}",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"61"
+						"localhost"
 					],
 					"port": "9085",
 					"path": [
@@ -1321,7 +1228,7 @@
 					"",
 					"if(pm.environment.get(\"testGroup\") === \"list\")",
 					"{",
-					"    pm.test(\" C'est bien une liste qui est retourné \", function(){",
+					"    pm.test(\" C'est bien une liste qui est retournée \", function(){",
 					"    pm.expect(pm.response.json()).to.be.an('array');",
 					"});",
 					"}",

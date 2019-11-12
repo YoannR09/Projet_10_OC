@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Classe pour récupèrer les données du MicroServiceReservation
  */
-@FeignClient(value = "microservice-reservation",url = "192.168.1.61:9085")
+@FeignClient(value = "microservice-reservation",url = "localhost:9085")
 public interface MicroServiceReservationProxy {
 
     /**

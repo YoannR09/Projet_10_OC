@@ -44,6 +44,8 @@ public class ReservationAction extends ActionSupport {
     private         String                  prenom;
     private         String                  nom;
     private         Abonne                  abonne;
+    private         Livre                   livre;
+    private         Bibliotheque            bibliotheque;
     private         List<Reservation>       listResa;
     private         List<Reservation>       listResaDispo;
     private         List<Reservation>       listResaNonDispo;
@@ -212,6 +214,8 @@ public class ReservationAction extends ActionSupport {
         String result =  ActionSupport.SUCCESS;
         HashMap<Float,Integer> listDiff = new HashMap<>();
         List<Float> listDiffOrdre = new ArrayList<>();
+        livre = microServiceLivreProxy.getLivre(livreId);
+        bibliotheque = microServiceBibliothequeProxy.getBibliotheque(bibliothequeId);
         pretList = microServicePretProxy.getListPretLivreBibliotheque(livreId,bibliothequeId);
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         for(Pret pret: pretList){
@@ -411,6 +415,22 @@ public class ReservationAction extends ActionSupport {
 
     public void setPretList(List<Pret> pretList) {
         this.pretList = pretList;
+    }
+
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
+    public Bibliotheque getBibliotheque() {
+        return bibliotheque;
+    }
+
+    public void setBibliotheque(Bibliotheque bibliotheque) {
+        this.bibliotheque = bibliotheque;
     }
 
     class ValueComparator implements Comparator<Float> {
